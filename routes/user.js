@@ -23,21 +23,22 @@ const registerValidator = [
     .exists()
     .withMessage("Vui lòng nhập số điện thoại")
     .notEmpty()
-    .withMessage("Số điện thoại không được để trống"),
-
-  check("birthday")
-    .exists()
-    .withMessage("Vui lòng nhập ngày sinh")
-    .notEmpty()
-    .withMessage("Ngày sinh không được để trống")
+    .withMessage("Số điện thoại không được để trống")
     .custom((value, { req }) => {
-      if (value.match(/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/)) {
+      const regex = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
+      if (value.match(regex)) {
         return true; // return "non-falsy" value to indicate valid data"
       } else {
         return false; // return "falsy" value to indicate invalid data
       }
     })
     .withMessage(`Số điện thoại hợp lệ, hãy kiểm tra lại`),
+
+  check("birthday")
+    .exists()
+    .withMessage("Vui lòng nhập ngày sinh")
+    .notEmpty()
+    .withMessage("Ngày sinh không được để trống"),
 
   check("address")
     .exists()
