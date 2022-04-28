@@ -12,7 +12,7 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cookieParser("khait"));
+app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(session({ cookie: { maxAge: 60000 } }));
 app.use(flash());
 
