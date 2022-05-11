@@ -6,7 +6,7 @@ const validator = require("../utils/validators");
 const { verifyToken, isLogin } = require("../middlewares/verifyToken");
 
 Router.route("/register")
-  .get(verifyToken, userController.getRegister)
+  .get(userController.getRegister)
   .post(
     upload.array("image", 2),
     validator.register,
@@ -14,8 +14,11 @@ Router.route("/register")
   );
 
 Router.route("/login")
-  .get(verifyToken, userController.getLogin)
+  .get(userController.getLogin)
   .post(validator.login, userController.postLogin);
 
-Router.get("/", verifyToken, userController.getHome);
+Router.route("/change-password").get(userController.getChangePassword);
+// .post(validator.login, userController.postChangePassword);
+
+Router.get("/", userController.getHome);
 module.exports = Router;

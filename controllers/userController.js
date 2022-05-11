@@ -92,6 +92,11 @@ exports.postLogin = async (req, res) => {
         return res.redirect("/user/login");
       }
 
+      // check first time login 
+      if(user.firstLogin){
+        return res.redirect("/user/change-password")
+      }
+
       // create access token
       const accessToken = jwt.sign(
         {
@@ -135,3 +140,8 @@ exports.getHome = (req, res) => {
   console.log(req.user);
   res.send("welcome");
 };
+
+
+exports.getChangePassword = (req, res) => {
+  res.render('change-password')
+}
